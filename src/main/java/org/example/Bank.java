@@ -6,9 +6,9 @@ import java.util.List;
 public class Bank {
     private String name;
     private List<Account> accounts;
-     private List<Account> transactions;
+     private List<Transaction> transactions;
 
-    public Bank(String name, List<Account> accounts, List<Account> transactions) {
+    public Bank(String name, List<Account> accounts, List<Transaction> transactions) {
         this.name = name;
         this.accounts = accounts;
         this.transactions = transactions;
@@ -22,7 +22,7 @@ public class Bank {
         return accounts;
     }
 
-    public List<Account> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
@@ -34,7 +34,7 @@ public class Bank {
         this.accounts = accounts;
     }
 
-    public void setTransactions(List<Account> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 }
