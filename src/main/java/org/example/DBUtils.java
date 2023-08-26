@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtils {
-    private static String dbURL = "jdbc:postgresql://localhost:5432/Banks";
+    private static String dbURL = "jdbc:postgresql://localhost:5432/Banks?useUnicode=yes&characterEncoding=UTF-8";
 
     private static String dbUserName="postgres";
     private static String dbPassword="";

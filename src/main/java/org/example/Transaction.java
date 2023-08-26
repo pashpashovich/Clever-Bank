@@ -1,60 +1,28 @@
 package org.example;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
+import java.sql.Date;
+import java.sql.Time;
+
+@Data
 public class Transaction {
 
     private int id;
-    private Account sourceAccount;
-    private Account destinationAccount;
+    private int sourceAccount_id;
+    private int destinationAccount_id;
     private double amount;
-    private LocalDateTime timestamp;
+    private TransactionType type;
+    private Date date;
+    private Time time;
 
-    public Transaction(int id, Account sourceAccount, Account destinationAccount, double amount, LocalDateTime timestamp) {
+    public Transaction(int id, int sourceAccount_id, int destinationAccount_id, double amount, TransactionType type, Date date, Time time) {
         this.id = id;
-        this.sourceAccount = sourceAccount;
-        this.destinationAccount = destinationAccount;
+        this.sourceAccount_id = sourceAccount_id;
+        this.destinationAccount_id = destinationAccount_id;
         this.amount = amount;
-        this.timestamp = timestamp;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Account getSourceAccount() {
-        return sourceAccount;
-    }
-
-    public void setSourceAccount(Account sourceAccount) {
-        this.sourceAccount = sourceAccount;
-    }
-
-    public Account getDestinationAccount() {
-        return destinationAccount;
-    }
-
-    public void setDestinationAccount(Account destinationAccount) {
-        this.destinationAccount = destinationAccount;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+        this.type = type;
+        this.date = date;
+        this.time = time;
     }
 }

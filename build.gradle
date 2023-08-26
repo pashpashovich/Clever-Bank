@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'war'
+    id 'org.gretty' version '3.0.7' // Используем Gretty вместо Tomcat
 }
 
 group 'org.example'
@@ -7,14 +9,27 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.eclipse.jetty:jetty-server:9.4.51.v20230217'
+    implementation 'org.eclipse.jetty:jetty-servlet:9.4.51.v20230217'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.7.1'
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.27'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
 }

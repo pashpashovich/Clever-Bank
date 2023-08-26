@@ -1,26 +1,29 @@
 package org.example;
 
+import lombok.Data;
+
+import java.util.List;
+
+@Data
 public class Account {
-    private String accountNumber;
-    private User user;
+    private int accountNumber;
     private double balance;
+    private BankName bank_name;
+    private List<Transaction> transactions;
 
-    public Account(String accountNumber, User user, double initialBalance) {
+    public Account(int accountNumber, double balance, BankName bank_name, List<Transaction> transactions) {
         this.accountNumber = accountNumber;
-        this.user = user;
-        this.balance = initialBalance;
+        this.balance = balance;
+        this.bank_name = bank_name;
+        this.transactions = transactions;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public double getBalance() {
-        return balance;
+    @Override
+    public String toString() {
+        return "Номер счёта: " + accountNumber +
+                ", баланс на счету: " + balance +
+                ", банк:" + bank_name +
+                ", история транзакций: " + transactions;
     }
 
     public void deposit(double amount) {
