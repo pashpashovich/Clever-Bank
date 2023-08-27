@@ -6,12 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CRUDUtils {
-    private static final String insertUser = "INSERT INTO \"public\".\"Users\" (user_id, login, password) VALUES (?, ?, ?)";
+    private static final String insertAccount = "INSERT INTO \"public\".\"Accounts\" (accountnumber,balance,account_id,bank_id) VALUES (?,?,?,?)";
+    private static final String insertCustomer = "INSERT INTO \"public\".\"Customers\" (customer_id,fio,has_access) VALUES (?,?,?)";
+    private static final String insertUser = "INSERT INTO \"public\".\"Users\" (login, password,salt) VALUES (?, ?, ?)";
     private static final String toGetAllUsers="SELECT * FROM \"public\".\"Users\"";
+    private static final String toGetAllCustomers="SELECT * FROM \"public\".\"Customers\"";
+
+    private static final String toGetAllAccounts="SELECT * FROM \"public\".\"Accounts\"";
+
     private static final String toGetAllAccountsofBank="SELECT * FROM \"public\".\"Accounts\" WHERE bank_id=?";
     private static final String toGetUser="SELECT * FROM \"public\".\"Users\" WHERE login=?";
+    private static final String toGetUserByID="SELECT * FROM \"public\".\"Users\" WHERE user_id=?";
+
     private static final String isThereAdmin="SELECT * FROM \"public\".\"Admins\" WHERE admin_id=?";
     private static final String isThereCustomer="SELECT * FROM \"public\".\"Customers\" WHERE customer_id=?";
+    private static final String toUpdateCustomer="UPDATE \"public\".\"Customers\" SET has_access=true WHERE customer_id=?";
 
 
     private static final String toGetAccountsOfTheUser="SELECT * FROM \"public\".\"Accounts\" WHERE account_id=?";
@@ -46,6 +55,23 @@ public class CRUDUtils {
         return user;
     }
 
+    public static User getUser(int user_id) {
+        User user=null;
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toGetUserByID)) {
+            preparedStatement.setInt(1,user_id);
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()) {
+                String login=rs.getString("login");
+                String hashedPassword=rs.getString("password");
+                user=new User(user_id,login,hashedPassword);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return user;
+    }
+
     public static List<User> getAllUsers() {
         List<User> users=new ArrayList<>();
         try(Connection connection=DBUtils.getConnection();
@@ -61,6 +87,43 @@ public class CRUDUtils {
             System.out.println(e.getMessage());
         }
         return users;
+    }
+
+    public static List<Customer> getAllCustomers() {
+        List<Customer> customers=new ArrayList<>();
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toGetAllCustomers)) {
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()) {
+                int customer_id=rs.getInt("customer_id");
+                String fio=rs.getString("fio");
+                boolean hasAccess=rs.getBoolean("has_access");
+                User user=getUser(customer_id);
+                customers.add(new Customer(customer_id,user.getLogin(),user.getPassword(),fio,getAccountsOfCustomer(customer_id),hasAccess));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return customers;
+    }
+
+    public static List<Account> getAllAccounts() {
+        List<Account> accounts=new ArrayList<>();
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toGetAllAccounts)) {
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()) {
+                int account_number=rs.getInt("accountnumber");
+                double balance=rs.getDouble("balance");
+                int account_id=rs.getInt("account_id");
+                int bank_id=rs.getInt("bank_id");
+                List<Transaction> transactionsofAccount=getTransactionsOfAccount(account_number);
+                accounts.add(new Account(account_number,balance,BankName.values()[bank_id-1],transactionsofAccount));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return accounts;
     }
 
     public static Admin getAdmin(User user) {
@@ -86,7 +149,7 @@ public class CRUDUtils {
             ResultSet rs=preparedStatement.executeQuery();
             while (rs.next()) {
                 String fio=rs.getString("fio");
-                boolean hasAccess=rs.getBoolean("hasAccess");
+                boolean hasAccess=rs.getBoolean("has_access");
                 customer=new Customer(user.getUser_id(),user.getLogin(),user.getPassword(),fio,getAccountsOfCustomer(user.getUser_id()),hasAccess);
             }
         } catch (SQLException e) {
@@ -95,6 +158,16 @@ public class CRUDUtils {
         return customer;
     }
 
+    public static void updateCustomer(Customer customer) {
+        List <Transaction> transactions=new ArrayList<>();
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toUpdateCustomer)) {
+            preparedStatement.setInt(1,customer.getUser_id());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static List<Account> getAccountsOfCustomer(int account_id) {
         List<Account> accounts=new ArrayList<>();
@@ -139,6 +212,43 @@ public class CRUDUtils {
             System.out.println(e.getMessage());
         }
         return transactions;
+    }
+
+    public static void saveUser(String login, String password,String salt) {
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(insertUser)) {
+            preparedStatement.setString(1,login);
+            preparedStatement.setString(2,password);
+            preparedStatement.setString(3,salt);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void saveCustomer(User user,String fio) {
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(insertCustomer)) {
+            preparedStatement.setInt(1,user.getUser_id());
+            preparedStatement.setString(2,fio);
+            preparedStatement.setBoolean(3,false);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void saveAccount(Account account, int customer_id) {
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(insertAccount)) {
+            preparedStatement.setInt(1,account.getAccountNumber());
+            preparedStatement.setDouble(2,account.getBalance());
+            preparedStatement.setInt(3,customer_id);
+            preparedStatement.setInt(4,account.getBank_name().ordinal()+1);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -238,30 +348,9 @@ public class CRUDUtils {
 //        return accounts;
 //    }
 
-//    public static void saveUser(User user) {
-//        try(Connection connection=DBUtils.getConnection();
-//            PreparedStatement preparedStatement=connection.prepareStatement(insertUser)) {
-//            preparedStatement.setInt(1,user.getUser_id());
-//            preparedStatement.setString(2,user.getLogin());
-//            preparedStatement.setString(3,user.getPassword());
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+//
 
-   /* public static List<Transaction> updateTransaction(int id, double sum) {
-        List <Transaction> transactions=new ArrayList<>();
-        try(Connection connection=DBUtils.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement(toUpdateTransaction)) {
-            preparedStatement.setDouble(1,sum);
-            preparedStatement.setInt(2,id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return transactions;
-    }
+   /*
 
     public static void deleteTransaction(int id) {
         List <Transaction> students=new ArrayList<>();
