@@ -3,10 +3,14 @@ package org.example;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException {
@@ -21,6 +25,14 @@ public class Main {
 //        } catch (Exception e) {
 //            System.out.println("Что-то пошло не так...");;
 //        }
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> {
+            LocalDate currentDate = LocalDate.now();
+            if (isEndOfMonth(currentDate)) {
+                YML.writeBank();
+                YML.updateAccounts();
+            }
+        }, 0, 30, TimeUnit.SECONDS);
         System.out.println("----Добро пожаловать в приложение Clever-Bank----");
         int choice; // переменная для выбора действия
         Scanner scanner;
@@ -367,5 +379,11 @@ public class Main {
             i++;
         }
         return myAccounts;
+    }
+    public static boolean isEndOfMonth(LocalDate date) {
+        int dayOfMonth = date.getDayOfMonth();
+        int lastDayOfMonth = date.lengthOfMonth();
+        return dayOfMonth == lastDayOfMonth;
+//        return date.getMonth().equals(Month.AUGUST);
     }
 }

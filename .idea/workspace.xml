@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="Added registration for new users">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Check.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Transfering.java" afterDir="false" />
+    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="Added transactions">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/YML.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bank.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CRUDUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CRUDUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bank.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +126,7 @@
       <workItem from="1692888643567" duration="14476000" />
       <workItem from="1692949533731" duration="20242000" />
       <workItem from="1693041181191" duration="25209000" />
-      <workItem from="1693130399055" duration="20381000" />
+      <workItem from="1693130399055" duration="24036000" />
     </task>
     <task id="LOCAL-00001" summary="Added classes">
       <option name="closed" value="true" />
@@ -161,7 +160,23 @@
       <option name="project" value="LOCAL" />
       <updated>1693137133471</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added transactions">
+      <option name="closed" value="true" />
+      <created>1693156887527</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1693156887527</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added transactions">
+      <option name="closed" value="true" />
+      <created>1693156951702</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1693156951702</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +198,8 @@
     <MESSAGE value="Added database" />
     <MESSAGE value="Started making menu" />
     <MESSAGE value="Added registration for new users" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added registration for new users" />
+    <MESSAGE value="Added transactions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added transactions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

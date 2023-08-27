@@ -203,6 +203,7 @@ public class CRUDUtils {
         }
     }
 
+
     public static List<Account> getAccountsOfCustomer(int account_id) {
         List<Account> accounts=new ArrayList<>();
         try(Connection connection=DBUtils.getConnection();

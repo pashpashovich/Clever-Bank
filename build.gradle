@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.eclipse.jetty:jetty-servlet:9.4.51.v20230217'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.7.1'
     implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.27'
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28'
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
