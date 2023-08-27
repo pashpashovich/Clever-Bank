@@ -20,10 +20,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Номер счёта: " + accountNumber +
-                ", баланс на счету: " + balance +
-                ", банк:" + bank_name +
-                ", история транзакций: " + transactions;
+        return accountNumber + "          " + balance +  "              "+ bank_name;
     }
 
     public void deposit(double amount) {
@@ -34,14 +31,14 @@ public class Account {
         balance -= amount;
     }
 
-    public void transfer(Account recipient, double amount) {
-        synchronized (this) {
-            synchronized (recipient) {
-                if (balance >= amount) {
-                    withdraw(amount);
-                    recipient.deposit(amount);
-                }
-            }
-        }
-    }
+//    public void transfer(Account recipient, double amount) {
+//        synchronized (this) {
+//            synchronized (recipient) {
+//                if (balance >= amount) {
+//                    withdraw(amount);
+//                    recipient.deposit(amount);
+//                }
+//            }
+//        }
+//    }
 }

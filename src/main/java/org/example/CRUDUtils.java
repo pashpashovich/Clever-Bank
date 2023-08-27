@@ -8,6 +8,8 @@ import java.util.List;
 public class CRUDUtils {
     private static final String insertAccount = "INSERT INTO \"public\".\"Accounts\" (accountnumber,balance,account_id,bank_id) VALUES (?,?,?,?)";
     private static final String insertCustomer = "INSERT INTO \"public\".\"Customers\" (customer_id,fio,has_access) VALUES (?,?,?)";
+    private static final String insertTransaction = "INSERT INTO \"public\".\"Transactions\" (transaction_id,type_tr,fromaccount_id,toaccount_id,amount,date,time) VALUES (?,?,?,?,?,?,?)";
+
     private static final String insertUser = "INSERT INTO \"public\".\"Users\" (login, password,salt) VALUES (?, ?, ?)";
     private static final String toGetAllUsers="SELECT * FROM \"public\".\"Users\"";
     private static final String toGetAllCustomers="SELECT * FROM \"public\".\"Customers\"";
@@ -17,10 +19,14 @@ public class CRUDUtils {
     private static final String toGetAllAccountsofBank="SELECT * FROM \"public\".\"Accounts\" WHERE bank_id=?";
     private static final String toGetUser="SELECT * FROM \"public\".\"Users\" WHERE login=?";
     private static final String toGetUserByID="SELECT * FROM \"public\".\"Users\" WHERE user_id=?";
+    private static final String toGetAccountByNum="SELECT * FROM \"public\".\"Accounts\" WHERE accountnumber=?";
+
 
     private static final String isThereAdmin="SELECT * FROM \"public\".\"Admins\" WHERE admin_id=?";
     private static final String isThereCustomer="SELECT * FROM \"public\".\"Customers\" WHERE customer_id=?";
     private static final String toUpdateCustomer="UPDATE \"public\".\"Customers\" SET has_access=true WHERE customer_id=?";
+
+    private static final String toUpdateAccount="UPDATE \"public\".\"Accounts\" SET balance=? WHERE accountnumber=?";
 
 
     private static final String toGetAccountsOfTheUser="SELECT * FROM \"public\".\"Accounts\" WHERE account_id=?";
@@ -70,6 +76,23 @@ public class CRUDUtils {
             System.out.println("SQL Exception: " + e.getMessage());
         }
         return user;
+    }
+
+    public static Account getAccount(int accountNum) {
+        Account account=null;
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toGetAccountByNum)) {
+            preparedStatement.setInt(1,accountNum);
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()) {
+                double balance= rs.getDouble("balance");
+                int bank_id=rs.getInt("bank_id");
+                account=new Account(accountNum,balance,BankName.values()[bank_id-1],getTransactionsOfAccount(accountNum));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return account;
     }
 
     public static List<User> getAllUsers() {
@@ -169,6 +192,17 @@ public class CRUDUtils {
         }
     }
 
+    public static void updateAccount(Account account) {
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toUpdateAccount)) {
+            preparedStatement.setDouble(1,account.getBalance());
+            preparedStatement.setInt(2,account.getAccountNumber());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static List<Account> getAccountsOfCustomer(int account_id) {
         List<Account> accounts=new ArrayList<>();
         try(Connection connection=DBUtils.getConnection();
@@ -250,6 +284,24 @@ public class CRUDUtils {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void saveTransaction(Transaction transaction) {
+        try(Connection connection=DBUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(insertTransaction)) {
+            preparedStatement.setInt(1,transaction.getId());
+            preparedStatement.setObject(2, transaction.getType(),Types.OTHER);
+            preparedStatement.setInt(3,transaction.getSourceAccount_id());
+            preparedStatement.setInt(4,transaction.getDestinationAccount_id());
+            preparedStatement.setDouble(5,transaction.getAmount());
+            preparedStatement.setDate(6,transaction.getDate());
+            preparedStatement.setTime(7,transaction.getTime());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
 
 

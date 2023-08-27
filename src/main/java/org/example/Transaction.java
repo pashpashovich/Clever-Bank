@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Calendar;
 
 @Data
 public class Transaction {
@@ -24,5 +25,17 @@ public class Transaction {
         this.type = type;
         this.date = date;
         this.time = time;
+    }
+
+    public static int generateId(Date date,Time time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.setTime(time);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        return (year * 100000000 + month * 1000000 + day * 10000 + hours * 100 + minutes);
     }
 }
