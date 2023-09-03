@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="Added JavaDoc documentation" />
+    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="Last working version">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/SignException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/check/check_1693155813858.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/check/check_1693156067412.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/check/check_1693736224771.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/AccountStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/AccountStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BankName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CRUDUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CRUDUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Check.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Check.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Currency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DBUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TransactionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TransactionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Transfering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Transfering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/YML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/YML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693248715310.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693730363160.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693730619946.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693731244624.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693731407853.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693731523979.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693732019185.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693734193329.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693734567728.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/AccountStamentOf65456781693734855160.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statements/Statements.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/statements/Statements.pdf" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,9 +70,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -145,7 +179,8 @@
       <workItem from="1693587275528" duration="3000" />
       <workItem from="1693639505207" duration="32000" />
       <workItem from="1693680862112" duration="4805000" />
-      <workItem from="1693728872023" duration="13152000" />
+      <workItem from="1693728872023" duration="15602000" />
+      <workItem from="1693747045452" duration="18941000" />
     </task>
     <task id="LOCAL-00001" summary="Added classes">
       <option name="closed" value="true" />
@@ -211,7 +246,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693743330100</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Last working version">
+      <option name="closed" value="true" />
+      <created>1693743698726</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1693743698726</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +279,8 @@
     <MESSAGE value="Added transactions" />
     <MESSAGE value="Added work with yml file" />
     <MESSAGE value="Added JavaDoc documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added JavaDoc documentation" />
+    <MESSAGE value="Last working version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Last working version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

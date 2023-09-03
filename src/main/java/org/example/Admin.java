@@ -34,7 +34,7 @@ public class Admin extends User{
      */
     public Admin(int user_id, String login, String password, List<User> users) {
         super(user_id, login, password);
-        this.users = users;
+        Admin.users = users;
     }
 
     /**

@@ -5,9 +5,14 @@ package org.example;
  */
 public enum Currency {
 
+    /** Belarusian rubles*/
     BYN,
+    /** US dollars */
     USD,
+    /** Russian rubles */
     RUB,
+    /** Euro*/
     XEU,
+    /** Chinese yuan*/
     CNY,
 }

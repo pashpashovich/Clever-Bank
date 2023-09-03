@@ -7,20 +7,25 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The class of working with file "bank.yml"
+ */
 public class YML {
     /**
      * This method writes values to yml file
      */
     public static void writeBank() {
-        Map<String, Double> bankMap = new HashMap<>();
+        Map<String, BigDecimal> bankMap = new HashMap<>();
         List<Account> accounts = CRUDUtils.getAllAccounts();
         for (Account account : accounts) {
             String s = Integer.toString(account.getAccountNumber());
-            bankMap.put(s, account.getBalance()*0.01);
+            BigDecimal multiplier = new BigDecimal("0.01");
+            bankMap.put(s, account.getBalance().multiply(multiplier));
         }
         DumperOptions options = new DumperOptions();
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK); // Настройки форматирования
@@ -38,12 +43,12 @@ public class YML {
     public static void updateAccounts() {
         Yaml yaml = new Yaml();
         try (InputStream inputStream = new FileInputStream("D:/Java/cleverBank/src/main/java/org/example/bank.yml")) {
-            Map<String, Double> data = yaml.load(inputStream);
-            for (Map.Entry<String, Double> entry : data.entrySet()) {
+            Map<String, BigDecimal> data = yaml.load(inputStream);
+            for (Map.Entry<String, BigDecimal> entry : data.entrySet()) {
                 int key = Integer.parseInt(entry.getKey());
-                Double toAddValue = entry.getValue();
+                BigDecimal toAddValue = entry.getValue();
                 Account account=CRUDUtils.getAccount(key);
-                double newBalance=toAddValue+account.getBalance();
+                BigDecimal newBalance=toAddValue.add(account.getBalance());
                 account.setBalance(newBalance);
                 CRUDUtils.updateAccount(account);
             }

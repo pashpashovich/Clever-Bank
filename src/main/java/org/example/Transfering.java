@@ -1,5 +1,6 @@
 package org.example;
 
+import java.math.BigDecimal;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,7 +15,7 @@ public class Transfering {
      * @param fromAccount - the object of class Account
      * @param amount - amount of withdraw
      */
-    public void transferFundsFrom(Account fromAccount, double amount) {
+    public void transferFundsFrom(Account fromAccount, BigDecimal amount) {
         try {
             transferLock.lock();
             fromAccount.withdraw(amount);
@@ -28,7 +29,7 @@ public class Transfering {
      * @param toAccount - the object of class Account
      * @param amount - amount of deposit
      */
-    public void transferFundsTo(Account toAccount, double amount) {
+    public void transferFundsTo(Account toAccount, BigDecimal amount) {
         try {
             transferLock.lock();
             toAccount.deposit(amount);

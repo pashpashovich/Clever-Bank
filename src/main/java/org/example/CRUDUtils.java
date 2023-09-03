@@ -1,5 +1,6 @@
 package org.example;
 
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -109,7 +110,7 @@ public class CRUDUtils {
             preparedStatement.setInt(1,accountNum);
             ResultSet rs=preparedStatement.executeQuery();
             while (rs.next()) {
-                double balance= rs.getDouble("balance");
+                BigDecimal balance= rs.getBigDecimal("balance");
                 int bank_id=rs.getInt("bank_id");
                 Date date=rs.getDate("date_of_open");
                 String type_cur=rs.getString("currency_t");
@@ -177,7 +178,7 @@ public class CRUDUtils {
             ResultSet rs=preparedStatement.executeQuery();
             while (rs.next()) {
                 int account_number=rs.getInt("accountnumber");
-                double balance=rs.getDouble("balance");
+                BigDecimal balance=rs.getBigDecimal("balance");
                 int bank_id=rs.getInt("bank_id");
                 List<Transaction> transactionsofAccount=getTransactionsOfAccount(account_number);
                 Date date=rs.getDate("date_of_open");
@@ -254,7 +255,7 @@ public class CRUDUtils {
     public static void updateAccount(Account account) {
         try(Connection connection=DBUtils.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement(toUpdateAccount)) {
-            preparedStatement.setDouble(1,account.getBalance());
+            preparedStatement.setBigDecimal(1,account.getBalance());
             preparedStatement.setInt(2,account.getAccountNumber());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -276,7 +277,7 @@ public class CRUDUtils {
             ResultSet rs=preparedStatement.executeQuery();
             while (rs.next()) {
                 int numberAccount=rs.getInt("accountnumber");
-                double balance=rs.getDouble("balance");
+                BigDecimal balance=rs.getBigDecimal("balance");
                 int bank_id=rs.getInt("bank_id");
                 Date date=rs.getDate("date_of_open");
                 String type_cur=rs.getString("currency_t");
@@ -310,7 +311,7 @@ public class CRUDUtils {
                 int toAccount_id=rs.getInt("toaccount_id");
                 String type_trs=rs.getString("type_tr");
                 TransactionType type_tr=TransactionType.valueOf(type_trs);
-                double amount=rs.getDouble("amount");
+                BigDecimal amount=rs.getBigDecimal("amount");
                 Date date=rs.getDate("date");
                 Time time=rs.getTime("time");
                 transactions.add(new Transaction(transaction_id,fromAccount_id,toAccount_id,amount,type_tr,date,time));
@@ -365,7 +366,7 @@ public class CRUDUtils {
         try(Connection connection=DBUtils.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement(insertAccount)) {
             preparedStatement.setInt(1,account.getAccountNumber());
-            preparedStatement.setDouble(2,account.getBalance());
+            preparedStatement.setBigDecimal(2,account.getBalance());
             preparedStatement.setInt(3,customer_id);
             preparedStatement.setInt(4,account.getBank_name().ordinal()+1);
             preparedStatement.setDate(5,account.getDateOfCreating());
@@ -387,7 +388,7 @@ public class CRUDUtils {
             preparedStatement.setObject(2, transaction.getType(),Types.OTHER);
             preparedStatement.setInt(3,transaction.getSourceAccount_id());
             preparedStatement.setInt(4,transaction.getDestinationAccount_id());
-            preparedStatement.setDouble(5,transaction.getAmount());
+            preparedStatement.setBigDecimal(5,transaction.getAmount());
             preparedStatement.setDate(6,transaction.getDate());
             preparedStatement.setTime(7,transaction.getTime());
             preparedStatement.executeUpdate();

@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class Check {
     /**  the number of the account to which transaction was made*/
     private int toAccountNum;
     /** the sum of the transaction*/
-    private double sum;
+    private BigDecimal sum;
 
     /**
      *
@@ -44,7 +45,7 @@ public class Check {
      * @param toAccountNum - the number of the account to which transaction was made
      * @param sum - the sum of the transaction
      */
-    public Check(long check_id, Date date, Time time, String tr_type, String fromBankName, String toBankName, int fromAccountNum, int toAccountNum, double sum) {
+    public Check(long check_id, Date date, Time time, String tr_type, String fromBankName, String toBankName, int fromAccountNum, int toAccountNum, BigDecimal sum) {
         this.check_id = check_id;
         this.date = date;
         this.time = time;

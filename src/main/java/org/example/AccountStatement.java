@@ -108,7 +108,7 @@ public class AccountStatement {
                     }
                     br.close();
                     document.close();
-                   file.delete();
+                   file.delete(); // удаляем текстовый файл
                     System.out.println("PDF файл успешно создан.");
                 } catch (DocumentException | IOException e) {
                     e.printStackTrace();

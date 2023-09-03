@@ -8,12 +8,12 @@ import java.sql.SQLException;
  */
 public class DBUtils {
     /** URL of database*/
-    private static String dbURL = "jdbc:postgresql://localhost:5432/Banks?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String dbURL = "jdbc:postgresql://localhost:5432/Banks?useUnicode=yes&characterEncoding=UTF-8";
 
     /** the user's name of database*/
-    private static String dbUserName="postgres";
+    private static final String dbUserName="postgres";
     /** the user's password of database */
-    private static String dbPassword="";
+    private static final String dbPassword="";
 
 
     /**

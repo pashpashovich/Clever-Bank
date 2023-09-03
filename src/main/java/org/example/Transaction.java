@@ -2,6 +2,7 @@ package org.example;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
@@ -18,8 +19,8 @@ public class Transaction {
     private int sourceAccount_id;
     /** the id of account to which transaction is made*/
     private int destinationAccount_id;
-    /** the amount of transaction*/
-    private double amount;
+    /** the amount of transaction in BYN*/
+    private BigDecimal amount;
     /** the type of transaction as enum*/
     private TransactionType type;
     /** the date of transaction*/
@@ -37,7 +38,7 @@ public class Transaction {
      * @param date - the date of transaction
      * @param time - time of transaction
      */
-    public Transaction(int id, int sourceAccount_id, int destinationAccount_id, double amount, TransactionType type, Date date, Time time) {
+    public Transaction(int id, int sourceAccount_id, int destinationAccount_id, BigDecimal amount, TransactionType type, Date date, Time time) {
         this.id = id;
         this.sourceAccount_id = sourceAccount_id;
         this.destinationAccount_id = destinationAccount_id;
@@ -62,6 +63,7 @@ public class Transaction {
         calendar.setTime(time);
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
         int minutes = calendar.get(Calendar.MINUTE);
-        return (year * 100000000 + month * 1000000 + day * 10000 + hours * 100 + minutes);
+        int seconds=calendar.get(Calendar.SECOND);
+        return (year * 100000000 + month * 1000000 + day * 10000 + hours * 100 + minutes*10+seconds);
     }
 }
