@@ -4,85 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="The final version">
-      <change afterPath="$PROJECT_DIR$/allclasses-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/allpackages-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/element-list" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-10.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-11.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-12.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-13.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-14.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-15.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-16.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-17.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-18.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-19.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-6.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-7.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-9.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/legal/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/legal/jquery.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/legal/jqueryUI.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Account.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/AccountStatement.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Bank.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/BankName.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/CRUDUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Check.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Currency.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Customer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/DBUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/PasswordHashing.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/SignException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Transaction.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/TransactionType.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/Transfering.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/User.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/YML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Account.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/AccountStatement.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Bank.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/BankName.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/CRUDUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Check.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Currency.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Customer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/DBUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/PasswordHashing.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/SignException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Transaction.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/TransactionType.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/Transfering.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/User.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/class-use/YML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/org/example/package-use.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script-dir/jquery-3.6.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script-dir/jquery-ui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script-dir/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/check/check_1693766253757.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/check/check_1693766298265.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/check/check_1693766373004.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/check/check_1693766672960.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/check/check_1693766733001.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/statements/AccountStamentOf6543381693766519419.txt" afterDir="false" />
-    </list>
+    <list default="true" id="c17ac70e-55db-4618-bab7-09566a89fcdf" name="Changes" comment="The final version" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -224,7 +146,7 @@
       <workItem from="1693639505207" duration="32000" />
       <workItem from="1693680862112" duration="4805000" />
       <workItem from="1693728872023" duration="15602000" />
-      <workItem from="1693747045452" duration="19538000" />
+      <workItem from="1693747045452" duration="19858000" />
     </task>
     <task id="LOCAL-00001" summary="Added classes">
       <option name="closed" value="true" />
@@ -306,7 +228,23 @@
       <option name="project" value="LOCAL" />
       <updated>1693767468468</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="The final version">
+      <option name="closed" value="true" />
+      <created>1693767727118</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1693767727118</updated>
+    </task>
+    <task id="LOCAL-00012" summary="The final version">
+      <option name="closed" value="true" />
+      <created>1693767763338</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1693767763338</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
