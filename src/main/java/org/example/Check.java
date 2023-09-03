@@ -8,18 +8,42 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.Date;
 
+/**
+ * The class of creating the check of the transaction
+ */
 @Data
 public class Check {
+    /** the unique number of the check*/
     private long check_id;
+    /** the date of creating the check*/
     private Date date;
+    /** time of creating the check*/
     private Time time;
+    /** the type of transaction as enum*/
     private String tr_type;
+    /** the name of the bank from which transaction was made*/
     private String FromBankName;
+    /**  the name of the bank to which transaction was made*/
     private String ToBankName;
+    /** the number of the account from which transaction was made*/
     private int fromAccountNum;
+    /**  the number of the account to which transaction was made*/
     private int toAccountNum;
+    /** the sum of the transaction*/
     private double sum;
 
+    /**
+     *
+     * @param check_id - the unique number of the check
+     * @param date - the date of creating the check
+     * @param time - time of creating the check
+     * @param tr_type - the type of transaction as enum
+     * @param fromBankName - the name of the bank from which transaction was made
+     * @param toBankName - the name of the bank to which transaction was made
+     * @param fromAccountNum - the number of the account from which transaction was made
+     * @param toAccountNum - the number of the account to which transaction was made
+     * @param sum - the sum of the transaction
+     */
     public Check(long check_id, Date date, Time time, String tr_type, String fromBankName, String toBankName, int fromAccountNum, int toAccountNum, double sum) {
         this.check_id = check_id;
         this.date = date;
@@ -32,11 +56,11 @@ public class Check {
         this.sum = sum;
     }
 
+    /** The method of creating the check*/
     public void saveCheckToFile() {
         String fileName = "check_" + System.currentTimeMillis() + ".txt"; // генерируем уникальное имя файла
         File file = new File("/D:/Java/cleverBank/src/check/" + fileName);
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write("----------------------------------\n");
             writer.write("\tБанковский чек\n");
             writer.write("Чек: "+check_id+"\n");
             writer.write(date+"\t"+time+"\n");

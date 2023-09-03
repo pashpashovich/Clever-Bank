@@ -3,13 +3,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The class to connect to the database
+ */
 public class DBUtils {
+    /** URL of database*/
     private static String dbURL = "jdbc:postgresql://localhost:5432/Banks?useUnicode=yes&characterEncoding=UTF-8";
 
+    /** the user's name of database*/
     private static String dbUserName="postgres";
+    /** the user's password of database */
     private static String dbPassword="";
 
 
+    /**
+     * The method of connection to the database
+     * @return returns the object of class Connection
+     */
     public static Connection getConnection () {
         Connection connection=null;
         try {

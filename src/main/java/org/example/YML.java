@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class YML {
-
+    /**
+     * This method writes values to yml file
+     */
     public static void writeBank() {
         Map<String, Double> bankMap = new HashMap<>();
         List<Account> accounts = CRUDUtils.getAllAccounts();
@@ -30,6 +32,9 @@ public class YML {
         }
     }
 
+    /**
+     * This method reads data from yml file and updates the records of accounts in database
+     */
     public static void updateAccounts() {
         Yaml yaml = new Yaml();
         try (InputStream inputStream = new FileInputStream("D:/Java/cleverBank/src/main/java/org/example/bank.yml")) {
@@ -44,7 +49,6 @@ public class YML {
             }
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
     }

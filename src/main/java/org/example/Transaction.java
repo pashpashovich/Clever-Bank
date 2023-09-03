@@ -6,17 +6,37 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 
+/**
+ * This class represents transaction
+ */
 @Data
 public class Transaction {
 
+    /** unique number of transaction*/
     private int id;
+    /** the id of account from which transaction is made*/
     private int sourceAccount_id;
+    /** the id of account to which transaction is made*/
     private int destinationAccount_id;
+    /** the amount of transaction*/
     private double amount;
+    /** the type of transaction as enum*/
     private TransactionType type;
+    /** the date of transaction*/
     private Date date;
+    /** time of transaction*/
     private Time time;
 
+    /**
+     * The constructor of the class
+     * @param id - unique number of transaction
+     * @param sourceAccount_id - the id of account from which transaction is made
+     * @param destinationAccount_id - the id of account to which transaction is made
+     * @param amount - the amount of transaction
+     * @param type - the type of transaction as enum
+     * @param date - the date of transaction
+     * @param time - time of transaction
+     */
     public Transaction(int id, int sourceAccount_id, int destinationAccount_id, double amount, TransactionType type, Date date, Time time) {
         this.id = id;
         this.sourceAccount_id = sourceAccount_id;
@@ -27,6 +47,12 @@ public class Transaction {
         this.time = time;
     }
 
+    /**
+     * This method generates the unique id of transaction
+     * @param date - current date
+     * @param time - current time
+     * @return returns generated id
+     */
     public static int generateId(Date date,Time time) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

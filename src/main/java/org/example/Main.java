@@ -12,7 +12,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * This is the main class which contains the main method and other static methods
+ * @author Kosovich Pavel
+ */
 public class Main {
+    /**
+     * With this method our app starts
+     * @param args standard argument for main method
+     * @throws NoSuchAlgorithmException the exception which is thrown if there is no algorithm for hashing password
+     */
     public static void main(String[] args) throws NoSuchAlgorithmException {
 //        Server server = new Server(8080);
 //        ServletContextHandler handler = new ServletContextHandler();
@@ -25,10 +35,9 @@ public class Main {
 //        } catch (Exception e) {
 //            System.out.println("Что-то пошло не так...");;
 //        }
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); // это планировщик, который повторяет действия каждые 30 секунд работы приложения
         scheduler.scheduleAtFixedRate(() -> {
-            LocalDate currentDate = LocalDate.now();
-            if (isEndOfMonth(currentDate)) {
+            if (isEndOfMonth()) {
                 YML.writeBank();
                 YML.updateAccounts();
             }
@@ -37,9 +46,9 @@ public class Main {
         int choice; // переменная для выбора действия
         Scanner scanner;
         while (true) {
-            User user;// текущий пользователь системы
-            Admin admin;
-            Customer customer;
+            User user;// текущий пользователь приложения
+            Admin admin; // текущий администратор приложения
+            Customer customer; // текущий клиент приложения
             String startMenu="Выберите действие:\n1.Авторизация\n2.Регистрация\n3.Выход из программы";
             choice=chooseAction(startMenu,1,3);
             switch (choice) {
@@ -48,49 +57,48 @@ public class Main {
                         System.out.print("Введите Ваш логин: ");
                         scanner=new Scanner(System.in);
                         String login;
-                        login = scanner.nextLine();
+                        login = scanner.nextLine(); // пользователь вводит свой логин
                         System.out.print("Введите Ваш пароль: ");
                         String password;
-                        password = scanner.nextLine();
-                        user = CRUDUtils.getUser(login, password);
+                        password = scanner.nextLine(); // и пароль
+                        user = CRUDUtils.getUser(login, password); // пытаемся получить пользователя по такому логину и паролю
                         if (user == null) {
                             System.out.println("Неверный логин или пароль...");
-                        System.out.println("1.Повторить попытку\n2.Выйти в главное меню");
-                        scanner=new Scanner(System.in);
-                        choice=scanner.nextInt();
+                        String act="Выберите действие:\n1.Повторить попытку\n2.Выйти в главное меню";
+                        choice=chooseAction(act,1,2);
                         if (choice==2) break;
                         }
-                        else {
-                            admin=CRUDUtils.getAdmin(user);
-                            if (admin!=null) {
+                        else { // если получили такого пользователя
+                            if (CRUDUtils.getAdmin(user)!=null) {
+                                admin=Admin.getInstance(user,CRUDUtils.getAllUsers());
                                 System.out.println("Вы вошли в приложение как администратор "+admin.getLogin());
                                 boolean flag=true;
                                 while (flag) {
-                                        String adminMenu="Выберите действие:\n1.Рассмотреть заявки на регистрацию\n2.Выйти из аккаунта\n3.Выйти из приложения";
-                                        choice=chooseAction(adminMenu,1,3);
+                                        String adminMenu="Выберите действие:\n1.Рассмотреть заявки на регистрацию\n2.Просмотреть всех пользователей\n3.Удалить пользователя\n4.Выйти из аккаунта\n5.Выйти из приложения";
+                                        choice=chooseAction(adminMenu,1,5);
                                     switch (choice) {
                                         case 1 -> {
-                                            List<Customer> customers;
-                                            customers=CRUDUtils.getAllCustomers();
+                                            List<Customer> applications;
+                                            applications=CRUDUtils.getAllCustomers();
                                             System.out.println("---Неподтверждённые заявки---");
                                             int i=1;
-                                            System.out.println("  Логин                       ФИО");
-                                            Iterator<Customer> iterator = customers.iterator();
+                                            System.out.println("  Логин                       ФIО");
+                                            Iterator<Customer> iterator = applications.iterator(); // используем итератор
                                             while (iterator.hasNext()) {
                                                 Customer registred_customer = iterator.next();
                                                 if (!registred_customer.isHasAccess()) {
                                                     System.out.println(i + ". " + registred_customer.getLogin() + " " + registred_customer.getFIO());
                                                     i++;
                                                 } else {
-                                                    iterator.remove(); // Удаление элемента из коллекции
+                                                    iterator.remove(); // удаление элемента из коллекции
                                                 }
                                             }
                                             if(i==1) System.out.println("Заявок нет");
                                             else {
                                                 String adminAppliances = "Выберите заявку для подтверждения: ";
                                                 choice = chooseAction(adminAppliances, 1, i);
-                                                System.out.println(customers.get(choice-1));
-                                                Customer newCustomer=customers.get(choice - 1);
+                                                System.out.println(applications.get(choice-1));
+                                                Customer newCustomer=applications.get(choice - 1);
                                                 CRUDUtils.updateCustomer(newCustomer);
                                                 System.out.println("Заявка подтверждена!\nДавайте теперь заполним данные этого клиента");
                                                 System.out.println("Введите количество счетов для добавления:");
@@ -129,32 +137,44 @@ public class Main {
                                                     }
                                                     String banks="Выберите банк, в котором будет обслуживаться счёт\n1.Клевер-банк\n2.Белинвестбанк\n3.БСББанк\n4.БеларусБанк\n5.СтатусБанк";
                                                     int bankNum=chooseAction(banks,1,5);
-                                                    CRUDUtils.saveAccount(new Account(numberAccount,balance,BankName.values()[bankNum-1],null),newCustomer.getUser_id());
+                                                    long currentTimeMillis = System.currentTimeMillis();
+                                                    Date currentDate = new Date(currentTimeMillis);
+                                                    System.out.println(currentDate);
+                                                    String currencies="Выберите валюту, в которой будут храниться средства на счету:\n1.Белорусские рубли\n2.Доллары США\n3.Российские рубли\n4.Евро\n5.Китайские юани";
+                                                    int choiceofCurrency=chooseAction(currencies,1,5);
+                                                    CRUDUtils.saveAccount(new Account(numberAccount,balance,BankName.values()[bankNum-1],currentDate,Currency.values()[choiceofCurrency-1],null),newCustomer.getUser_id());
                                                }
                                             }
                                         }
                                         case 2 -> {
-                                            flag=false;
+                                            outCustomers();
                                         }
                                         case 3 -> {
-                                            exit();
+                                            List<Customer> customers=outCustomers();
+                                            String s="Введите номер клиента для удаления(будет удалена их учётная запись, а также все счета и транзакции, связанные с этими счетами): ";
+                                            int choice3=chooseAction(s,1,customers.size());
+                                            Customer delCustomer=customers.get(choice3-1);
+                                            CRUDUtils.deleteUser(delCustomer.getUser_id());
+                                            System.out.println("Удаление прошло успешно)");
                                         }
+                                        case 4 -> flag=false;
+
+                                        case 5 -> exit();
+
                                     }
                                 }
                             }
                             else {
                                 customer=CRUDUtils.getCustomer(user);
-                                if (customer!=null)
+                                if (customer.isHasAccess())
                                 {
                                     System.out.println("Вы вошли в приложение как клиент "+customer.getFIO());
                                     boolean flag=true;
                                     while (flag) {
-                                            String customerMenu="Выберите действие:\n1.Просмотреть свои счета\n2.Пополнение средств на счету\n3.Снятие средств со счёта \n4.Перевод денежных средств\n5.Выйти из аккаунта\n6.Выйти из приложения";
-                                            choice=chooseAction(customerMenu,1,6);
+                                            String customerMenu="Выберите действие:\n1.Просмотреть свои счета\n2.Пополнение средств на счет\n3.Снятие средств со счёта \n4.Перевод денежных средств\n5.Создать выписку по транзакциям\n6.Выйти из аккаунта\n7.Выйти из приложения";
+                                            choice=chooseAction(customerMenu,1,7);
                                         switch (choice) {
-                                            case 1 -> {
-                                               getAccountsOfTheUser(customer);
-                                            }
+                                            case 1 -> getAccountsOfTheUser(customer);
                                             case 2 -> {
                                                 List<Account> accounts=getAccountsOfTheUser(customer);
                                                 double amount;
@@ -291,8 +311,20 @@ public class Main {
                                                     System.out.println("Чек успешно сохранён в папку check");
                                                 }
                                             }
-                                            case 5 -> flag=false;
-                                            case 6 -> exit();
+                                            case 5 -> {
+                                                List<Account> accounts = getAccountsOfTheUser(customer);
+                                                String chooseAccount = "Выберите счёт, по которому хотите получить выписку: ";
+                                                int choice2 = chooseAction(chooseAccount, 1, accounts.size());
+                                                Account myAccount = accounts.get(choice2 - 1);
+                                                String choosePeriod="Выберите период выписки:\n1.За месяц\n2.За год\n3.За весь период обслуживания";
+                                                int choice3=chooseAction(choosePeriod,1,3);
+                                                String chooseFormat="Выберите формат выписки:\n1.PDF\n2.TXT";
+                                                int choice4=chooseAction(chooseFormat,1,2);
+                                                AccountStatement accountStatement=new AccountStatement(customer,myAccount);
+                                                accountStatement.saveAccountStatement(choice4,choice3);
+                                            }
+                                            case 6 -> flag=false;
+                                            case 7 -> exit();
 
                                         }
                                     }
@@ -312,36 +344,38 @@ public class Main {
 
                 }
                 case 2 -> {
-                    System.out.println("----Регистрация----\nПридумайте себе логин: ");
+                    System.out.print("----Регистрация----\nПридумайте себе логин: ");
                     String login;
-                    while (true) {
+                    while (true) { // проверяем введённый пользователем логин на уникальность
                         scanner=new Scanner(System.in);
                         login=scanner.nextLine();
-                        if (!Admin.isUniqueLogin(login)) System.out.println("Такой логин уже существует...\nПовторите попытку: ");
+                        if (!Admin.isUniqueLogin(login)) System.out.print("Такой логин уже существует...\nПовторите попытку: ");
                         else break;
                     }
-                    System.out.println("Придумайте себе пароль: ");
-                    String password=scanner.nextLine(),salt=PasswordHashing.generateSalt(),hashedPassword=PasswordHashing.hashPassword(password,salt);
-                    CRUDUtils.saveUser(login,hashedPassword,salt);
-                    User user2=CRUDUtils.getUser(login,password);
-                    System.out.println("Введите свои фамилию, имя, отчество (латиницей): ");
+                    System.out.print("Придумайте себе пароль: ");
+                    String password=scanner.nextLine(),salt=PasswordHashing.generateSalt(),hashedPassword=PasswordHashing.hashPassword(password,salt); // пользователь вводит пароль, генерируется соль и этот пароль хешируется
+                    CRUDUtils.saveUser(login,hashedPassword,salt); // сохраняем пользователя в бд
+                    User user2=CRUDUtils.getUser(login,password); // получаем пользователя из бд, так как не знаем его user_id
+                    System.out.print("Введите свои фамилию, имя, отчество: ");
                     String fio=scanner.nextLine();
                     assert user2 != null;
-                    CRUDUtils.saveCustomer(user2,fio);
-                    System.out.println("Спасибо за регистрацию! Далее администратор подтвердит Ваши данные и добавит Ваши счета...\nОжидайте,пожалуйста");
+                    CRUDUtils.saveCustomer(user2,fio); // сохраняем клиента в бд
+                    System.out.println("Спасибо за регистрацию! Далее администратор подтвердит Ваши данные и добавит Ваши счета...\nВозвращайтесь позже,пожалуйста");
                 }
                 case 3 -> exit();
             }
-//        CRUDUtils.getTransactionsData("SELECT * FROM \"public\".\"TransactionBank\"");
-//        System.out.println(CRUDUtils.getUsersData("SELECT * FROM \"public\".\"User\""));
-//        System.out.println(CRUDUtils.getAccountsData("SELECT * FROM \"public\".\"Account\""));
-
         }
     }
 
-
+    /**
+     * This is a static method which checks the user's choice
+     * @param menu this is a string which contains the options which user can choose
+     * @param start this is the smallest number which user can choose
+     * @param end this is the biggest number which user can choose
+     * @return the serial number of the user's choice
+     */
     public static int chooseAction(String menu,int start, int end) { // метод выбора действия
-       int choice=0;
+       int choice;
        Scanner scanner=new Scanner(System.in);
         while (true) {
             System.out.println(menu);
@@ -356,11 +390,20 @@ public class Main {
         }
         return choice;
     }
+
+    /**
+     * This is a static method that ends the work of the app
+     */
     public static void exit() {
         System.out.print("Спасибо за использование приложения)\nЖдём Вашего возвращения)");
         System.exit(0);
     }
 
+    /**
+     * This static method checks the uniqueness of the account number across all accounts which are in the database
+     * @param accountNumber just the account number
+     * @return returns true if the number is unique and false if it is not
+     */
     public static boolean isNumAccountUnique(int accountNumber) {
         List<Account> accounts=CRUDUtils.getAllAccounts();
         for (Account account: accounts) {
@@ -370,6 +413,12 @@ public class Main {
         }
         return true;
     }
+
+    /**
+     * This static method is called when it is needed to get all accounts of the exact customer
+     * @param customer this is the object of the class Customer
+     * @return returns the list of accounts of the customer
+     */
     public static List<Account> getAccountsOfTheUser(Customer customer) {
         List<Account> myAccounts=customer.getAccounts();
         System.out.println("Номер счёта  Баланс на счету      Банк ");
@@ -380,10 +429,30 @@ public class Main {
         }
         return myAccounts;
     }
-    public static boolean isEndOfMonth(LocalDate date) {
-        int dayOfMonth = date.getDayOfMonth();
-        int lastDayOfMonth = date.lengthOfMonth();
+
+    /**
+     * This static method checks if today is the end of the current month or not
+     * @return true if the end and false if not
+     */
+    public static boolean isEndOfMonth() {
+        LocalDate currentDate = LocalDate.now();
+        int dayOfMonth = currentDate.getDayOfMonth();
+        int lastDayOfMonth = currentDate.lengthOfMonth();
         return dayOfMonth == lastDayOfMonth;
-//        return date.getMonth().equals(Month.AUGUST);
+    }
+
+    /**
+     * This static method prints all the customers
+     * @return returns the list of all customers
+     */
+    public static List<Customer> outCustomers() {
+        List<Customer> customers=CRUDUtils.getAllCustomers();
+        System.out.println("№ Логин                ФIО");
+        int i=1;
+        for (Customer customer1: customers) {
+            System.out.println(i+" "+customer1.getLogin() + " " + customer1.getFIO());
+            i++;
+        }
+        return customers;
     }
 }
