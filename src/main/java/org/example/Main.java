@@ -24,17 +24,6 @@ public class Main {
      * @throws NoSuchAlgorithmException the exception which is thrown if there is no algorithm for hashing password
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
-//        Server server = new Server(8080);
-//        ServletContextHandler handler = new ServletContextHandler();
-//        handler.setContextPath("/");
-//        UserServlet userServlet=new UserServlet();
-//        handler.addServlet(new ServletHolder(userServlet), "/users");
-//        server.setHandler(handler);
-//        try {
-//            server.start();
-//        } catch (Exception e) {
-//            System.out.println("Что-то пошло не так...");;
-//        }
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); // это планировщик, который повторяет действия каждые 30 секунд работы приложения
         scheduler.scheduleAtFixedRate(() -> {
             if (isEndOfMonth()) {
